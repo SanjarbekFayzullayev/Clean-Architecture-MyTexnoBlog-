@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:texno_blog/core/theme/app_colors.dart';
 
 class AuthButton extends StatelessWidget {
-  const AuthButton({Key? key}) : super(key: key);
+  final String btnText;
+
+  const AuthButton({super.key, required this.btnText});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class AuthButton extends StatelessWidget {
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
         ),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(40),
       ),
       child: ElevatedButton(
         onPressed: () {},
@@ -25,9 +27,9 @@ class AuthButton extends StatelessWidget {
             fixedSize: const Size(390, 56),
             backgroundColor: AppColors.transparent,
             shadowColor: AppColors.transparent),
-        child: const Text(
-          "Sign Up",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+        child: Text(
+          btnText,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
         ),
       ),
     );
