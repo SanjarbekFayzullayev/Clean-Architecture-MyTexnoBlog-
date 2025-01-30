@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:texno_blog/core/theme/app_colors.dart';
+import 'package:texno_blog/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:texno_blog/features/auth/presentation/pages/login_page.dart';
 import 'package:texno_blog/features/auth/presentation/widgets/auth_button.dart';
 import 'package:texno_blog/features/auth/presentation/widgets/auth_field.dart';
@@ -55,7 +57,20 @@ class _SignupPageState extends State<SignupPage> {
                 isObscureText: true,
               ),
               const SizedBox(height: 20),
-              const AuthButton(btnText: "Sign Up"),
+              AuthButton(
+                btnText: "Sign Up",
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    context.read<AuthBloc>().add(
+                          AuthSignUp(
+                            email: emailController.text.trim(),
+                            password: passwordController.text.trim(),
+                            name: nameController.text.trim(),
+                          ),
+                        );
+                  }
+                },
+              ),
               const SizedBox(height: 20),
               GestureDetector(
                 onTap: () => Navigator.push(

@@ -1,5 +1,5 @@
 class AppSecrets{
-  static const String sBaseUrl="";
-  static const String sBaseAnonKey="";
+  static const String sBaseUrl="https://fshtwivggwrwtmywbrxj.supabase.co";
+  static const String sBaseAnonKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzaHR3aXZnZ3dyd3RteXdicnhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgxNTA1ODUsImV4cCI6MjA1MzcyNjU4NX0.uZ2mSb-Dv6wuXFNq6d1fr3Jp7yzIAfOBQuUJBfMz98I";
 
 }

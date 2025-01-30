@@ -3,8 +3,13 @@ import 'package:texno_blog/core/theme/app_colors.dart';
 
 class AuthButton extends StatelessWidget {
   final String btnText;
+  final VoidCallback onPressed;
 
-  const AuthButton({super.key, required this.btnText});
+  const AuthButton({
+    super.key,
+    required this.btnText,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class AuthButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(40),
       ),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
             fixedSize: const Size(390, 56),
             backgroundColor: AppColors.transparent,
