@@ -13,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final supBase = await Supabase.initialize(
       url: AppSecrets.sBaseUrl, anonKey: AppSecrets.sBaseAnonKey);
+
   runApp(
     MultiBlocProvider(
       providers: [
@@ -20,7 +21,7 @@ void main() async {
           create: (_) => AuthBloc(
             userSignUp: UserSignUp(
               AuthRepositoryImpl(
-                AuthRemoteDataSourceImpl(supBase.client as Supabase),
+                AuthRemoteDataSourceImpl(supBase),
               ),
             ),
           ),

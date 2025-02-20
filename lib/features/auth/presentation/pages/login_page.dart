@@ -30,56 +30,59 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false, // keyboard error  off
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Form(
           key: formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Sign In.",
-                style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 30),
-              AuthField(hintText: "Email", controller: emailController),
-              const SizedBox(height: 14),
-              AuthField(
-                hintText: "Password",
-                controller: passwordController,
-                isObscureText: true,
-              ),
-              const SizedBox(height: 20),
-              AuthButton(
-                btnText: "Sign in",
-                onPressed: () {},
-              ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    SignupPage.route(),
-                  );
-                },
-                child: RichText(
-                  text: TextSpan(
-                    text: "Don't have an account?",
-                    style: Theme.of(context).textTheme.titleMedium,
-                    children: [
-                      TextSpan(
-                        text: "Sign Up",
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: AppColors.gradient2,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                      ),
-                    ],
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Sign In.",
+                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 30),
+                AuthField(hintText: "Email", controller: emailController),
+                const SizedBox(height: 14),
+                AuthField(
+                  hintText: "Password",
+                  controller: passwordController,
+                  isObscureText: true,
+                ),
+                const SizedBox(height: 20),
+                AuthButton(
+                  btnText: "Sign in",
+                  onPressed: () {},
+                ),
+                const SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      SignupPage.route(),
+                    );
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Don't have an account?",
+                      style: Theme.of(context).textTheme.titleMedium,
+                      children: [
+                        TextSpan(
+                          text: "Sign Up",
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: AppColors.gradient2,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

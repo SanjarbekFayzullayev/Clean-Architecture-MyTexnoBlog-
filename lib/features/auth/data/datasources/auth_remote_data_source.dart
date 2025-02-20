@@ -1,14 +1,15 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:texno_blog/core/error/exceptions.dart';
+import 'package:texno_blog/features/auth/data/models/user_model.dart';
 
 abstract interface class AuthRemoteDataSource {
-  Future<String> signUpWithEmailPassword({
+  Future<UserModel> signUpWithEmailPassword({
     required String name,
     required String email,
     required String password,
   });
 
-  Future<String> loginUpWithEmailPassword({
+  Future<UserModel> loginUpWithEmailPassword({
     required String email,
     required String password,
   });
@@ -20,16 +21,30 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl(this.supBaseClient);
 
   @override
-  Future<String> loginUpWithEmailPassword({
+  Future<UserModel> loginUpWithEmailPassword({
     required String email,
     required String password,
-  }) {
-    // TODO: implement loginUpWithEmailPassword
-    throw UnimplementedError();
+  }) async {
+    try {
+      final response = await supBaseClient.client.auth.signInWithPassword(
+        password: password,
+        email: email,
+
+      );
+      if (response.user == null) {
+        throw ServerExceptions("User is null");
+      }
+      return UserModel.formJson(response.user!.toJson());
+    } catch (e) {
+      throw ServerExceptions(e.toString());
+    }
+
+    // // TODO: implement loginUpWithEmailPassword
+    // throw UnimplementedError();
   }
 
   @override
-  Future<String> signUpWithEmailPassword({
+  Future<UserModel> signUpWithEmailPassword({
     required String name,
     required String email,
     required String password,
@@ -42,10 +57,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       if (response.user == null) {
         throw ServerExceptions("User is null");
       }
-      return response.user!.id;
+      return UserModel.formJson(response.user!.toJson());
     } catch (e) {
       throw ServerExceptions(e.toString());
-
     }
   }
 }
