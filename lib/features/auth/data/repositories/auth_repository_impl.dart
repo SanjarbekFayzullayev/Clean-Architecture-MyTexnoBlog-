@@ -1,4 +1,5 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as sb;
 import 'package:texno_blog/core/error/exceptions.dart';
 import 'package:texno_blog/core/error/failures.dart';
 import 'package:texno_blog/features/auth/data/datasources/auth_remote_data_source.dart';
@@ -42,6 +43,8 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final user = await fn();
       return right(user);
+    } on sb.AuthException catch (e) {
+      return left(Failures(e.message));
     } on ServerExceptions catch (e) {
       return left(Failures(e.message));
     }

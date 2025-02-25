@@ -4,7 +4,9 @@ import 'package:get_it/get_it.dart';
 import 'package:texno_blog/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:texno_blog/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:texno_blog/features/auth/domain/repository/auth_repository.dart';
+import 'package:texno_blog/features/auth/domain/usecases/user_login.dart';
 import 'package:texno_blog/features/auth/domain/usecases/user_sign_up.dart';
+import 'package:texno_blog/features/auth/presentation/bloc/auth_bloc.dart';
 
 final sericeLoacator = GetIt.instance;
 
@@ -33,6 +35,18 @@ void _initAuth() {
   sericeLoacator.registerFactory(
     () => UserSignUp(
       sericeLoacator(),
+    ),
+  );
+
+  sericeLoacator.registerFactory(
+    () => UserLogin(
+      sericeLoacator(),
+    ),
+  );
+  sericeLoacator.registerLazySingleton(
+    () => AuthBloc(
+      userSignUp: sericeLoacator(),
+      userLogin: sericeLoacator(),
     ),
   );
 }
